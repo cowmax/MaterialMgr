@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="materialManage"
+  id="myeclipse.1451463102283"
+  context-root="/materialManage"
+  j2ee-spec="5.0"
+  archive="materialManage.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

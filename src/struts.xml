@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.objectFactory" value="spring"></constant>
+
+	<package name="default" namespace="/" extends="struts-default,json-default">
+	
+		<!-- 面料管理action -->
+		<action name="material*" class="bmaterialAction" method="{1}">
+			<result name="show">material_show.jsp</result>
+			<result name="addOperation">addMaterial.jsp</result>
+			<result name="editSupOperation">mtlSupplierList.jsp</result>
+			<result name="addMtlTypeOperation">
+				<param name="location">materialTypeList.jsp</param>
+				<param name="typesJson">${typesJson}</param> 
+			</result>
+			
+			<result type="json">
+				<param name="root">flag</param>
+			</result>
+			
+			<result type="json" name="getmtlCode">
+				<param name="root">jsonResult</param>
+			</result>
+			
+			<result type="json" name="loadCombobox">
+				<param name="root">ctypesJson</param>
+			</result>
+			
+			<result type="json" name="typeOpr">
+				<param name="root">jsonResult</param>
+			</result>
+			<result name="saveMater">
+				<param name="location">addSuccess.jsp</param>
+				<param name="refreshList">${refreshList}</param>
+				<param name="titleName">${titleName}</param>
+			</result> 
+			<result name="editMaterialOpr">
+				<param name="location">editMaterial.jsp</param>
+				<param name="typesJson">${typesJson}</param> 
+				<param name="brandValue">${brandValue}</param> 
+				<param name="eimagesJson">${eimagesJson}</param>
+				<param name="ingreds">${ingreds}</param>
+				<param name="productCodes">${productCodes}</param>
+				<param name="newMaterial">${newMaterial}</param>
+			</result>
+			
+			<result name="materialDetail">
+				<param name="location">detailMaterial.jsp</param>
+				<param name="typesJson">${typesJson}</param> 
+				<param name="brandValue">${brandValue}</param> 
+				<param name="eimagesJson">${eimagesJson}</param>
+				<param name="ingreds">${ingreds}</param>
+				<param name="productCodes">${productCodes}</param>
+				<param name="newMaterial">${newMaterial}</param>
+			</result>
+			
+		</action>
+		
+		<!-- 品牌action -->
+		<action name="brand*" class="bmaterialBrandAction" method="{1}">
+			<result name="allEbrands" type="json">
+				<param name="root">brandsJson</param>
+			</result>
+			
+			<result name="brandOperation">chooseBrand.jsp</result>
+			
+			<result type="json" name="addBrand">
+				<param name="root">jsonResult</param>
+			</result>
+		</action>
+		
+		<!-- 供应商action -->
+		<action name="supplier*" class="bmaterialSupplierAction" method="{1}">
+			<result name="show">material_show.jsp</result>
+			<result name="addOperation">addMaterial.jsp</result>
+			<result name="editSupOperation">mtlSupplierList.jsp</result>
+			<result name="detailSupOperation">mtlSupplierList_detail.jsp</result>
+			<result name="editSuppliers">editMaterialSupplier.jsp</result>
+			<result type="json">
+				<param name="root">flag</param>
+			</result>
+			<result type="json" name="getSuppliers">
+				<param name="root">jsonResult</param>
+			</result>
+		</action>
+		
+		<!-- Suin action -->
+		<action name="suin*" class="suinAction" method="{1}">
+			<result name="addSupOpt">addMaterialSupplier.jsp</result>
+			<result name="allSuin">suin_show.jsp</result>
+			<result name="addSuid">
+				<param name="location">addSuccess.jsp</param>
+				<param name="refreshList">${refreshList}</param>
+				<param name="titleName">${titleName}</param>
+			</result> 
+			<result type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="mergeOpr">editSuin.jsp</result>
+			
+		</action>
+		
+		<!-- 测试报告action -->
+		<action name="treport*" class="bmaterialTestReportAction" method="{1}">
+			<result name="testReportOpt">addMaterialTestReport.jsp</result>
+			<result name="allTestReport">editMaterialTestReport.jsp</result>
+			<result type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="update" type="json">
+				<param name="root">flag</param>
+			</result>
+			
+		</action>
+		
+		<!-- 关联产品action -->
+		<action name="relpdu*" class="bmaterialRelateProductAction" method="{1}">
+			<result name="show">materialRelateProductList.jsp</result>
+			<result name="detailRelpdu">materialRelateProductList_detail.jsp</result>
+			<result type="json">
+				<param name="root">flag</param>
+			</result>
+			<result type="json" name="closeRelpdu">
+				<param name="root">productCodes</param>
+			</result>
+		</action>
+		
+		<!-- 产品action -->
+		<action name="product*" class="productAction" method="{1}">
+			<result name="show">productList.jsp</result>
+		</action>
+		
+		<!--照片管理  -->
+		<action name="img*" class="bmaterialImageAction" method="{1}">
+			<result name="imagesave" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result  type="json" name="jsonResult">
+				<param name="root">jsonResult</param>
+			</result>		
+		</action>
+		
+		<!--照片类型管理  -->
+		<action name="itype*" class="bmaterialImageTypeAction" method="{1}">
+			<result name="all">addImage.jsp</result>
+			<result name="show">imageTypeList.jsp</result>
+			<result name="savap" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="del" type="json">
+				<param name="root">flag</param>
+			</result>
+			
+		</action>
+		
+		<!--面料成分  -->
+		<action name="ingr*" class="ingredientAction" method="{1}">
+			<result name="savaInd" type="json">
+			  <param name="root">flag</param>
+			</result>
+			<result name="show">addIngredient.jsp</result>
+			<result name="detailIngredient">addIngredient_detail.jsp</result>
+			<result name="del" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="ingredList" type="json">
+				<param name="root">IngredBuf</param>
+			</result>
+		</action>
+	</package>
+
+</struts>

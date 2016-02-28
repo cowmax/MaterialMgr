@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+encoding//WebRoot/css/style.css=UTF-8
+encoding//WebRoot/index.jsp=UTF-8
+encoding//WebRoot/script/mtlSupplierList.js=UTF-8
+encoding//src/com/actions/BMaterialAction.java=UTF-8
+encoding//src/com/actions/BMaterialBrandAction.java=GBK
+encoding//src/com/actions/BMaterialIngredientAction.java=UTF-8
+encoding//src/com/actions/BMaterialRelateProductAction.java=UTF-8
+encoding//src/com/actions/ProductAction.java=GBK
+encoding//src/com/actions/SuinAction.java=UTF-8
+encoding//src/com/bean/BMaterialSupplier.java=GBK
+encoding//src/com/daoImpl/BMaterialIngredientDaoImpl.java=GBK
+encoding//src/com/serviceImpl/BMaterialRelateProductServiceImpl.java=GBK
+encoding//src/com/serviceImpl/UtilSupport.java=UTF-8

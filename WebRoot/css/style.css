@@ -1,0 +1,203 @@
+@import url("menu.css");
+
+body {
+	font-family: "宋体", "Arial", "Helvetica", "sans-serif";
+	font-size: 12px;
+	padding: 6px;
+}
+/*一般标签统一样式*/
+input {
+	font-size: 12px;
+}
+
+select {
+	font-size: 12px;
+}
+
+textarea {
+	font-size: 12px;
+}
+
+a:link {
+	font-size: 12px;
+	color: #000000;
+	text-decoration: underline;
+}
+
+a:visited {
+	font-size: 12px;
+	color: gray;
+	text-decoration: underline;
+}
+
+a:hover {
+	font-size: 12px;
+	color: red;
+	text-decoration: underline;
+}
+
+a:active {
+	font-size: 12px;
+	color: #000000;
+	text-decoration: underline;
+}
+
+form {
+	margin: 0px;
+}
+
+td {
+	font-family: "宋体", "Arial", "Helvetica", "sans-serif";
+	font-size: 12px;
+}
+
+.form-table {
+	width:100%;
+	padding: 20px 20px 20px 100px;
+}
+
+.form-table tr td {
+	padding:5px;
+}
+
+.form-table tr td:first-child {
+	width: 7.5em;
+}
+
+.form-table input{
+	border:1px grey solid;
+	text-indent:0.3em;
+}
+
+.form-table input.l-btn{
+	padding:5px 10px 5px 10px;
+}
+
+.toolbar{
+	padding: 3px 0px;
+}
+
+.toolbar input.l-btn{
+	padding:5px 10px 5px 10px;
+}
+
+.pager{
+	padding:6px 0px;
+}
+
+.pager input{
+	margin:0px 3px;
+	text-align:center;
+}
+
+.pager a{
+	margin:0px 3px;
+
+	}
+
+
+/*--------Override Easy-UI's Styles ------------*/
+.textbox{
+	border-radius:0px !important;
+}
+
+.l-btn{
+	border-radius:0px !important;
+}
+
+tr.datagrid-header-row td div.datagrid-cell{
+	text-align:center;
+	font-weight:bold;
+}
+div.datagrid-cell{
+	padding:6px;
+}
+
+/*---------------------------*/
+
+.tab-subtitle{
+	text-align:left;
+	padding:2em 0px 0px 2em;
+}
+
+#pagebar{
+	padding-top: 10px;
+}
+/*--属性为disable--*/
+.textbox-disabled{
+	background-color:#CCCCCC;
+}
+
+.copy-right{
+	padding:0px;
+}
+.trade-mark{
+	font-size:1.3em;
+}
+.label-text{
+	margin-top: 10px;
+	display: block;
+	line-height:1.5em;
+	color:grey;
+}
+
+.system-name{
+	font-weight:bold;
+	font-size:3em;
+}
+
+.title-pannel{
+	padding:8px 20px;
+}
+
+.user-status{
+	float: right; 
+}
+.menu-line{
+	left:0px;
+}
+.menu-text {
+  padding-left: 5px;
+}
+
+.left-panel{
+	width: 60%;
+	height:600px; 
+	background-color:#efefef; 
+	float: left;
+}
+
+.panel-box{
+	border:1px solid #f0f0f0 !important;
+}
+
+.jump-btn{
+	padding:0px 5px;
+}
+
+.jump-btn .l-btn-text{
+	line-height:20px !important;
+}
+.pager > span{
+	text-align:center;
+}
+
+.pager > b{
+	text-align:center;
+	font-weight:normal;
+	padding:0px 2px;
+}
+
+.pager > a{
+	text-decoration:none;
+}
+
+.photoDiv{
+	float: left;
+	margin-right: 5px;
+	height: 100%;
+	padding: 10px 0px;
+}
+.colorSpan{
+	padding: 0px 4px;
+}
