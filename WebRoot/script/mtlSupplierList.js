@@ -59,26 +59,43 @@
 		var mtsColorCount = $("#mtsColorCount").val();
 		var mtsCode = $("#mtsCode").val();
 		
-		$.ajax({
-			type : 'POST',
-			url : 'supplieraddSupplier.action',
-			data : {
-				'suid':suid,
-				'suna':suna,
-				'mtsName':mtsName,
-				'mtsColorCount':mtsColorCount,
-				'mtsCode':mtsCode
-			},
-			dataType : 'json',
-			success : function(data) {
-				if(data){
-					$('#addSupplier').window('close');
-					$("#addSupplier").window('refresh','suinaddSupOperation');
-					var trgUrl = 'supplierloadAllSupperList.action?mtlIdCode='+data.mtlId;
-					$('#editSupplier').window('refresh', trgUrl); 
+		if (!$("#supplierSaveform").form('validate')){
+			$.messager.show({
+				msg : '<div style="width:100%"><div style="line-height:50px;text-align:center;">请正确输入！</div></div>',
+				timeout : 1800,
+				showSpeed : 200,
+				showType : 'show',
+				style : {
+					right : '',
+					top : 200,
+					bottom : ''
 				}
-			}
-		});
+			});
+			
+		}else{
+			
+			$.ajax({
+				type : 'POST',
+				url : 'supplieraddSupplier.action',
+				data : {
+					'suid':suid,
+					'suna':suna,
+					'mtsName':mtsName,
+					'mtsColorCount':mtsColorCount,
+					'mtsCode':mtsCode
+				},
+				dataType : 'json',
+				success : function(data) {
+					if(data){
+						$('#addSupplier').window('close');
+						$("#addSupplier").window('refresh','suinaddSupOperation');
+						var trgUrl = 'supplierloadAllSupperList.action?mtlIdCode='+data.mtlId;
+						$('#editSupplier').window('refresh', trgUrl); 
+					}
+				}
+			});
+		}
+		
 	}
 	
 	/**

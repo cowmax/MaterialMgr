@@ -49,7 +49,7 @@
 				<table align="center"  style="padding-left: 40px;">
 	  				<tr>
 		    			<td>
-		    				<select class="easyui-combobox" id="ingredientTypeCmb" name="bmaterialIngredient.ingredientName" data-options="height:26,width:110" prompt="成分" panelHeight="100";>
+		    				<select class="easyui-combobox" id="ingredientTypeCmb" name="bmaterialIngredient.ingredientName" data-options="height:26,width:110,required:true,missingMessage:'请选择成分类型'" prompt="成分" panelHeight="100";>
 								<option value=""></option>
 								<c:forEach items="${allIngredientTypes}" var="ingType">
 									<option value="${ingType.ingredientType}" >${ingType.ingredientType}</option>

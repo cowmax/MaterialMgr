@@ -25,7 +25,18 @@ $.extend($.fn.validatebox.defaults.rules, {
 			return /^[0-9]*[1-9][0-9]*$/.test(value);
 	        },
 	        message: '请输入数字'
-    } 
+    },
+    validateNotNull:{
+    	validator: function (value) {
+    		// 为空时不验证
+			if(value!=''){
+				return true;
+			}else{
+				return false;
+			} 
+	     },
+	     message: '填写完整信息'
+    }
 });
 
 /**

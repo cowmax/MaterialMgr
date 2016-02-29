@@ -56,7 +56,8 @@ window.onload=clearForm;//不要括号
 				<tr>
 					<td>供应商</td>
 					<td>
-						<select class="easyui-combobox" id="supplier" style="width:148px;height:26px" prompt="请选择供应商" panelHeight="100"; editable="false">
+						<select class="easyui-combobox" id="supplier" style="width:148px;height:26px" prompt="请选择供应商" panelHeight="100"; 
+						editable="false" data-options="required:true,missingMessage:'请选择供应商'">
 							<option value=""></option>
 							<c:forEach items="${allSuinList}" var="suin">
 								<option value="${suin.suid}">${suin.suna}</option>
@@ -68,21 +69,21 @@ window.onload=clearForm;//不要括号
 				<tr style="margin-bottom: 50px;">
 					<td>供方面料名称</td>
 					<td>
-						<input id="mtsName" value="" class="easyui-textbox" style="height: 26px;"/>
+						<input id="mtsName" value="" class="easyui-textbox" style="height: 26px;" required="true" missingMessage="请输入供方面料名称""/>
 					</td>
 				</tr>
 					
 				<tr style="margin-bottom: 50px;">
 					<td>供方颜色数量</td>
 					<td>
-						<input id="mtsColorCount" value="" class="easyui-textbox" style="height: 26px;" data-options=" validType:['#validateColCount'],missingMessage:'请输入颜色数量'" />
+						<input id="mtsColorCount" value="" class="easyui-textbox" style="height: 26px;" required="true" data-options=" validType:['#validateColCount'],missingMessage:'请输入颜色数量'" />
 					</td>
 				</tr>
 					
 				<tr style="margin-bottom: 50px;">
 					<td>供方面料编码</td>
 					<td>
-						<input id="mtsCode" value="" class="easyui-textbox" style="height: 26px;" />
+						<input id="mtsCode" value="" class="easyui-textbox" style="height: 26px;" required="true" missingMessage="请输入供方面料编码" />
 					</td>
 				</tr>
 				<tr>

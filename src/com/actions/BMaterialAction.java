@@ -719,6 +719,8 @@ public class BMaterialAction extends ActionSupport {
 		newMaterial.setMtlCode(selfMtlCode);
 		//设置当前时间
 		newMaterial.setSysDt(Timestamp.valueOf(str));
+		//设置创建时间
+		newMaterial.setCreateDt(Timestamp.valueOf(str));
 		//添加当前操作用户
 		newMaterial.setSysUser("admin");
 		//修改状态（2）
@@ -1053,17 +1055,40 @@ public class BMaterialAction extends ActionSupport {
 			options.put("@qsupplierName", qsupplierName);
 		}
 		
-		ebmaterialList = bmaterialBiz.getMtlByOptions(options);
+		List<ExtraBMaterial> allEbmaterials = bmaterialBiz.getMtlByOptions(options);
 		
-		totalcount = ebmaterialList.size();		//获取总条数
+		totalcount = allEbmaterials.size();		//获取总条数
 
 		totalpage = totalcount % pageSize == 0 ? totalcount / pageSize 
 				: totalcount / pageSize + 1;		//获取总页数
 
 		offset = getPageOffset();
+		
+		ebmaterialList = getPageList(String.valueOf(offset),String.valueOf(pageSize),allEbmaterials);
+		
 		parentMtlTypeList = bmaterialBiz.allParentType();
 		
 		return "show";
+	}
+	
+	private List<ExtraBMaterial> getPageList(String pageIndex, String pageSize,List<ExtraBMaterial> allInfo){
+		List<ExtraBMaterial> pageBmaterial;
+		int psz  = (pageSize == null)? 10 : Integer.parseInt(pageSize);
+		int idx = (pageIndex == null)? 0 : Integer.parseInt(pageIndex);
+		
+		int totalRows = allInfo.size();
+		int totalPages = (int)Math.ceil((float)totalRows/psz);
+		idx = Math.min(totalPages-1, idx);
+
+		int fromIndex = idx * psz;
+		int toIndex = Math.min(fromIndex + psz, totalRows);
+
+		if(allInfo.size()>0){
+			pageBmaterial = allInfo.subList(fromIndex, toIndex);
+		}else{
+			pageBmaterial=new ArrayList();
+		}
+		return pageBmaterial;  
 	}
 	
 	// Added by JSL : 获取翻页偏移量(实际上是将要翻到的页面的页索引，页索引从 0 开始)

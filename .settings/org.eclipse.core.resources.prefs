@@ -11,4 +11,5 @@ encoding//src/com/actions/SuinAction.java=UTF-8
 encoding//src/com/bean/BMaterialSupplier.java=GBK
 encoding//src/com/daoImpl/BMaterialIngredientDaoImpl.java=GBK
 encoding//src/com/serviceImpl/BMaterialRelateProductServiceImpl.java=GBK
+encoding//src/com/serviceImpl/BMaterialServiceImpl.java=UTF-8
 encoding//src/com/serviceImpl/UtilSupport.java=UTF-8

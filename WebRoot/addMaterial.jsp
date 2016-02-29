@@ -205,6 +205,7 @@
 	 *打开添加供应方信息窗口
 	 */
 	function showEditSupplier(){  
+		$('#editSupplier').window({left:"200px", top:"100px"}); 
 		$("#editSupplier").window('open');
 	}
 	
@@ -226,6 +227,7 @@
 	 *打开面料类型列表窗口
 	 */
 	function showTypeList(){  
+		$('#getMaterialTypeList').window({left:"200px", top:"100px"}); 
 		$("#getMaterialTypeList").window('open');
 	}
 	
@@ -322,7 +324,7 @@
 						showType : 'show',
 						style : {
 							right : '',
-							top : '',
+							top : 200,
 							bottom : ''
 						}
 					});
@@ -336,68 +338,83 @@
 	 * 保存照片信息
 	 */
 	function savaphotoImage(){
-	 	var mtlId=$("#photoMtlId").val();
-	 	
-		$.ajax({
-			url : 'imgsaveImage.action',
-			type : "POST",
-			data : $("#saveformImage").serialize(),
-			dataType : 'json',
-			success : function(data) {
-				// Clear all images
+		if (!$("#saveformImage").form('validate')){
+			$.messager.show({
+				msg : '<div style="width:100%"><div style="line-height:50px;text-align:center;">请正确输入！</div></div>',
+				timeout : 800,
+				showSpeed : 200,
+				showType : 'show',
+				style : {
+					right : '',
+					top : '-200',
+					bottom : ''
+				}
+			});
+			
+		}else{
+		 	var mtlId=$("#photoMtlId").val();
+		 	
+			$.ajax({
+				url : 'imgsaveImage.action',
+				type : "POST",
+				data : $("#saveformImage").serialize(),
+				dataType : 'json',
+				success : function(data) {
+					// Clear all images
+					var imgList = document.getElementById("imageList");
+					while(imgList.hasChildNodes()){
+						imgList.removeChild(imgList.firstChild);
+					}
+							
+							//显示照片信息
+					// Clear all images
 				var imgList = document.getElementById("imageList");
 				while(imgList.hasChildNodes()){
 					imgList.removeChild(imgList.firstChild);
 				}
-						
-						//显示照片信息
-				// Clear all images
-			var imgList = document.getElementById("imageList");
-			while(imgList.hasChildNodes()){
-				imgList.removeChild(imgList.firstChild);
-			}
-			// Add images
-			jQuery.each(data.jsonList, function(i,item){
-				var div = document.createElement("div");
-					div.setAttribute("id","imageShow");
-					div.className = "photoDiv";
-			
-					//添加图片
-					var divIamge = document.createElement("div");
-					var oImg = document.createElement("img");
-			
-					oImg.src = item.imgUrl;
-					divIamge.setAttribute("id","imageDiv");
-					divIamge.appendChild(oImg);
-			
-			
-					//添加文字显示及删除
-					var divLink = document.createElement("div");
-					divLink.setAttribute("id","linkDiv");
-			
-					//颜色显示
-					var colorName = document.createElement("span");
-					colorName.innerText = item.imgColor;
-					colorName.className = "colorSpan";
-			
-					//删除操作
-					var delOpr = document.createElement("a");
-					delOpr.text = "删除";
-					delOpr.onclick= function()
-					{ 
-						sureDelImage(item.imgId,item.mtlId); 
-					};
-					divLink.appendChild(colorName);
-					divLink.appendChild(delOpr);
-			
-					div.appendChild(divIamge);
-					div.appendChild(divLink);
-			
-					$("#imageList").append(div);
-				}) 
-				$('#imageWin').window('close');
-			}
-		});
+				// Add images
+				jQuery.each(data.jsonList, function(i,item){
+					var div = document.createElement("div");
+						div.setAttribute("id","imageShow");
+						div.className = "photoDiv";
+				
+						//添加图片
+						var divIamge = document.createElement("div");
+						var oImg = document.createElement("img");
+				
+						oImg.src = item.imgUrl;
+						divIamge.setAttribute("id","imageDiv");
+						divIamge.appendChild(oImg);
+				
+				
+						//添加文字显示及删除
+						var divLink = document.createElement("div");
+						divLink.setAttribute("id","linkDiv");
+				
+						//颜色显示
+						var colorName = document.createElement("span");
+						colorName.innerText = item.imgColor;
+						colorName.className = "colorSpan";
+				
+						//删除操作
+						var delOpr = document.createElement("a");
+						delOpr.text = "删除";
+						delOpr.onclick= function()
+						{ 
+							sureDelImage(item.imgId,item.mtlId); 
+						};
+						divLink.appendChild(colorName);
+						divLink.appendChild(delOpr);
+				
+						div.appendChild(divIamge);
+						div.appendChild(divLink);
+				
+						$("#imageList").append(div);
+					}) 
+					$('#imageWin').window('close');
+				}
+			});
+		}
 	}
 	
 	/**
@@ -611,7 +628,7 @@
 				if(mtlPrice!=""){
 					var eprice = mtlPrice*1000/(weigth*width);
 					
-					if(isNaN(eprice)){
+					if(!isNaN(eprice)){
 						$("#emtlPrice").textbox("setValue",eprice.toFixed(2));
 					}else{
 						$("#emtlPrice").textbox("setValue","");
@@ -655,10 +672,7 @@
 		<!-- 测试报告  -->
 		<div id="addTestReport" class="easyui-window" title="测试报告"
 			collapsible="false" minimizable="false" maximizable="false" closed="true"  modal="true"
-			 style="width:500px;height:300px; padding: 10px;" href="
-			 
-			 
-			 treportaddTestReportOpt.action?mtlId=${newMaterial.mtlId}"> 
+			 style="width:500px;height:300px; padding: 10px;" href="treportaddTestReportOpt.action?mtlId=${newMaterial.mtlId}"> 
 		</div> 
 		<!-- 添加面料类型  -->
 		<div id="getMaterialTypeList" class="easyui-window" title="面料类型"
@@ -762,7 +776,7 @@
 						<tr>
 							<td>生产周期</td>
 							<td>
-								<input class="easyui-textbox" name="newMaterial.prdCycle" value="" style="height: 26px;" data-options="validType:['#validateNum'],missingMessage:'请输入库存数量'"/> 
+								<input class="easyui-textbox" name="newMaterial.prdCycle" value="" style="height: 26px;" data-options="validType:['#validateNum'],missingMessage:'请输入生产周期'"/> 
 								<span style="color: red;" id="msg"></span>
 							</td>
 						</tr>
@@ -777,6 +791,12 @@
 							<td>供方信息</td>
 							<td>
 								<a onclick="showEditSupplier()" class="easyui-linkbutton" style="padding: 0px 3px;">编辑</a>
+							</td>
+						</tr>
+						<tr>
+							<td>面料照片</td>
+							<td style="width: 180px;">
+								<a onclick="addImage()" class="easyui-linkbutton" id="addPhoto" style="padding: 0px 3px;">添加</a>
 							</td>
 						</tr>
 					</table>
@@ -865,20 +885,16 @@
 								<a onclick="showTestReport()" class="easyui-linkbutton" style="padding: 0px 3px;">编辑</a>
 							</td>
 						</tr>
-					</table>
-				</div>
-				<div id="content_photo" style="width: 100%;">
-					<table class="form-table" style="padding-top:0px;">
 						<tr>
-							<td>面料照片</td>
-							<td style="width: 180px;">
-								<a onclick="addImage()" class="easyui-linkbutton" id="addPhoto" style="padding: 0px 3px;">添加</a>
-							</td>
-							<td style="padding-left:120px;">风险自评</td>
+							<td>风险自评</td>
 							<td>
 								<input class="easyui-textbox" id="riskSelfAssessment" name="newMaterial.riskSelfAssessment" value="" style="height: 26px;" />
 							</td>
 						</tr>
+					</table>
+				</div>
+				<div id="content_photo" style="width: 100%;">
+					<table class="form-table" style="padding-top:0px;">
 						<tr>
 							<td></td>
 							<td colspan="3" >

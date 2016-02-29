@@ -106,6 +106,29 @@ public class BMaterialTestReportAction extends ActionSupport {
 		}
 	}
 	
+	/**
+	 * 添加面料测试报告操作
+	 * @return
+	 */
+	public String detailTestReportOpt(){
+		
+		material = bmaterialBiz.findByMtlId(mtlId);
+		
+		//判断测试报告是否存在
+		mtlTestReports=bmaterialTestReportBiz.findTestReportsByMtlid(mtlId);
+		
+		if(mtlTestReports.size()>0){
+			
+			//返回对象
+			testReport=mtlTestReports.get(0);
+			
+			return "detailTestReport";
+		
+		}else{
+			
+			return "testReportOpt";
+		}
+	}
 	
 	/**
 	 * 添加测试报告

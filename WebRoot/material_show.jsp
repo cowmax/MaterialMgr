@@ -99,6 +99,18 @@ $(function(){
 });
 
 	/**
+	 *照片不存在触发事件
+	 */
+	function nofind(){
+
+	var img=event.srcElement;
+	
+	img.src="http://localhost:8080/materialManage/images/noPhoto.jpg";
+	
+	
+	}
+	
+	/**
 	 *解析照片路径
 	 */
 	function photoFieldFmtr(val, row){
@@ -106,7 +118,7 @@ $(function(){
 		var doc = $.parseXML(val);
 		var url = $($(doc).find("img_url")[0]).text();
 		return "<input type='hidden' value='"+ val +"' name='xmlImgurl'>" + 
-			"<a href='#'><img class = 'materialPhoto' style='width: 64px; height: 64px;' src='"+ url +"'></img></a>";
+			"<a href='#'><img class = 'materialPhoto' onerror='nofind();' style='width: 64px; height: 64px;' src='"+ url +"'></img></a>";
 	}
 	
 	/**
@@ -452,8 +464,8 @@ $(function(){
 				共<b id="ttCount">${totalcount }</b>条记录 转到&nbsp;<input value="${offset+1}" size="2" id="offset" class="easyui-textbox" />&nbsp;页/<b id="ttPage">${totalpage }</b>页
 				<button class="easyui-linkbutton jump-btn" width="20" onclick="reload()">跳转</button>
 				<a onclick="turnPage(0)">&lt;&lt; 第一页</a> <a
-					onclick="turnPage(${offset-1})">&lt; 上一页</a> <a
-					onclick="turnPage(${offset+1})">下一页 &gt;</a> <a
+					onclick="if(${offset-1}>=0){turnPage(${offset-1})}">&lt; 上一页</a> <a
+					onclick="if(${offset+1}!=${totalpage}){turnPage(${offset+1})}">下一页 &gt;</a> <a
 					onclick="turnPage(${totalpage-1})">最后一页 &gt;&gt;</a>
 			</div>
 		</div>

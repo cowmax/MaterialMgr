@@ -119,4 +119,28 @@ function addPhotoColor(){
 
 	});
 
-	
+	/**
+	 * 保存判断
+	 */
+	function  addsave(){	
+		
+		if (!$("#saveformImage").form('validate')){
+			
+			$.messager.show({
+				msg : '<div style="width:100%"><div style="line-height:50px;text-align:center;">请填写完整！</div></div>',
+				timeout : 800,
+				showSpeed : 200,
+				showType : 'show',
+				style : {
+					right : '',
+					top : '200',
+					bottom : ''
+						
+						
+				}
+			});
+			
+		}else{
+			savaphotoImage();
+		}
+	}

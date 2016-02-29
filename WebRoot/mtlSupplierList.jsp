@@ -134,7 +134,7 @@
 				共<b id="ttCount">${totalcount }</b>条记录 转到&nbsp;<input value="${offset+1}" size="2" id="offset" class="easyui-textbox" />&nbsp;页/<b id="ttPage">${totalpage }</b>页
 				<button class="easyui-linkbutton jump-btn" width="20" onclick="ms_reload()">跳转</button>
 				<a onclick="ms_turnPage(0)">&lt;&lt; 第一页</a> <a
-					onclick="if(${offset-1}<0){ms_turnPage(${offset-1})}">&lt; 上一页</a> <a
+					onclick="if(${offset-1}>0){ms_turnPage(${offset-1})}">&lt; 上一页</a> <a
 					onclick="if(${offset+1}!=${totalpage}){ms_turnPage(${offset+1})}">下一页 &gt;</a> <a
 					onclick="ms_turnPage(${totalpage-1})">最后一页 &gt;&gt;</a>
 			</div>

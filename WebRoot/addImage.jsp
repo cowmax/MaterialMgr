@@ -98,14 +98,14 @@
 						<tr>
 							<td>名称</td>
 							<td>
-								<input class="easyui-textbox" id="imgName" name="bmaterialImage.imgTitle" data-options="onChange:function(){imageUrl()}"  value="" style="height: 26px;"/> 
+								<input class="easyui-textbox" id="imgName" name="bmaterialImage.imgTitle" data-options="onChange:function(){imageUrl()},required:true,missingMessage:'请输入照片名'"  value="" style="height: 26px;"/> 
 								<span style="color: red;" id="msg"></span>
 							</td>
 						</tr>
 						<tr>
 							<td>类型</td>
 							<td>
-								<select class="easyui-combobox" id="imgType"  name="bmaterialImage.bmaterialImageType.imgType" style="width:112px;height:26px" prompt="照片类型" panelHeight="100"; editable="false";>
+								<select class="easyui-combobox" id="imgType"  name="bmaterialImage.bmaterialImageType.imgType" style="width:112px;height:26px" prompt="照片类型" panelHeight="100"; editable="false"; data-options="required:true,missingMessage:'请选择照片类型'">
 									<option value=""></option>
 									<c:forEach items="${imgTypeList}" var="imty">
 										<c:choose>
@@ -126,7 +126,7 @@
 						<tr>
 							<td>颜色</td>
 							<td>
-								<select class="easyui-combobox" id="photoColor" name="bmaterialImage.imgColor" style="width:112px;height:26px" prompt="面料颜色" panelHeight="100"; editable="false";>
+								<select class="easyui-combobox" id="photoColor" name="bmaterialImage.imgColor" style="width:112px;height:26px" prompt="面料颜色" panelHeight="100"; editable="false"; data-options="required:true, missingMessage:'请选择照片颜色'">
 									<option value=""></option>
 									<c:forEach items="${requestScope.imageColorList}" var="imco">
 										<c:choose>
@@ -166,7 +166,7 @@
 						<tr>
 							<td></td>
 							<td>
-								<a class="easyui-linkbutton" onclick="javascript:savaphotoImage()" style="margin-left: 10px;">&nbsp;保存&nbsp;</a>&nbsp;&nbsp;&nbsp;
+								<a class="easyui-linkbutton" onclick="addsave()"   style="margin-left: 10px;">&nbsp;保存&nbsp;</a>&nbsp;&nbsp;&nbsp;
 								<input class="easyui-linkbutton" type="button" onclick="goBackImage()" value="返回" />
 							</td>
 						</tr>

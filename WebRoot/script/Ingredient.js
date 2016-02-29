@@ -18,22 +18,10 @@ $.extend($.fn.validatebox.defaults.rules, {
 		
 		// 判断用户输入值是否合法
 		
-		if (!$("#saveBMIngred").form('validate'))
-			{
-			$.messager.show({
-				msg : '<div style="width:100%"><div style="line-height:50px;text-align:center;">请真确输入！</div></div>',
-				timeout : 800,
-				showSpeed : 200,
-				showType : 'show',
-				style : {
-					right : '',
-					top : '',
-					bottom : ''
-				}
-			});
-			}
-		else
-			{
+		if (!$("#saveBMIngred").form('validate')){
+			
+			
+			}else{
 			var mtlId=$("#IngredMtlId").val();
 			
 			$.ajax({

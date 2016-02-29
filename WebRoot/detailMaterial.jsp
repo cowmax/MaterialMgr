@@ -101,22 +101,7 @@
 			$("#imageList").append(div);
 	     }  
 				    
-		$("#mtlType").combobox({
-		    onSelect:function checkRoleName(params) {
-		    	var mtlType=$("#mtlType").combobox("getValue");
-		    	$.ajax({
-					type : 'POST',
-					url : 'materialgetMtlCode.action',
-					data : {
-						'mtlTypeId':mtlType
-					},
-					dataType : 'json',
-					success : function(data) {
-						$("#materialCode").textbox('setValue',data.selfMtlCode);
-					}
-				});
-		    }
-	     });
+	     truncatePrice();
 	})
 	
 	//初始化类型集合
@@ -209,6 +194,43 @@
 
 	}
 	
+	/**
+	 * 公斤到米的转换
+	*/
+	function truncatePrice(){
+		var mtlUnit=$("#mtlUnit").html().trim();
+		if(mtlUnit=="公斤"){
+			var mtlNtxPrice = $("#mtlNtxPrice").val();
+			var mtlPrice = $("#mtlPrice").val();
+			var weigth = $("#weigth").val();
+			var width = $("#width").val();
+			
+			if(weigth!=""&&width!=""){
+				if(mtlNtxPrice!=""){
+					var entxPrice = mtlNtxPrice*1000/(weigth*width);
+					if(!isNaN(entxPrice)){
+						$("#emtlNtxPrice").textbox("setValue",entxPrice.toFixed(2));
+					}else{
+						$("#emtlNtxPrice").textbox("setValue","");
+					}
+					
+				}
+				if(mtlPrice!=""){
+					var eprice = mtlPrice*1000/(weigth*width);
+					
+					if(!isNaN(eprice)){
+						$("#emtlPrice").textbox("setValue",eprice.toFixed(2));
+					}else{
+						$("#emtlPrice").textbox("setValue","");
+					}
+				}
+			}
+		}else{
+			$("#emtlNtxPrice").textbox("setValue","");
+			$("#emtlPrice").textbox("setValue","");
+		}
+	}
+	
 </script>
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
@@ -223,7 +245,7 @@
 		<!-- 测试报告  -->
 		<div id="addTestReport" class="easyui-window" title="测试报告"
 			collapsible="false" minimizable="false" maximizable="false" closed="true"  modal="true"
-			 style="width:500px;height:300px; padding: 10px;" href="editMaterialTestReport.jsp"> 
+			 style="width:500px;height:300px; padding: 10px;"  href="treportdetailTestReportOpt.action?mtlId=${newMaterial.mtlId}"> 
 		</div> 
 		<!-- 添加面料类型  -->
 		<div id="getMaterialTypeList" class="easyui-window" title="面料类型"
@@ -283,14 +305,15 @@
 							<td>不含税价</td>
 							<td>
 								<div style="width: 148px;">
-									<input class="easyui-textbox" disabled="disabled" name="newMaterial.mtlNtxPrice" value="${newMaterial.mtlNtxPrice}" style="width: 65px; height: 26px;" data-options=" required:false,validType:['#mtlNtxPrice'],missingMessage:'请输入不含税价'"/> 
-									<select id="unit" name="newMaterial.mtlUnit" class="easyui-combobox" style="width:80px;height:26px" panelHeight="100"; editable="false">
-										<option value="公斤" <c:if test="${newMaterial.mtlUnit=='公斤'}"> selected="true"</c:if>>元/公斤</option>
-										<option value="米" <c:if test="${newMaterial.mtlUnit=='米'}"> selected="true"</c:if>>元/米</option>
-										<option value="码" <c:if test="${newMaterial.mtlUnit=='码'}"> selected="true"</c:if>>元/码</option>
-										<option value="英尺 " <c:if test="${newMaterial.mtlUnit=='英尺 '}"> selected="true"</c:if>>元/英尺</option>
-									</select> 
+									<input class="easyui-textbox" disabled="disabled" id="mtlNtxPrice" name="newMaterial.mtlNtxPrice" value="${newMaterial.mtlNtxPrice}" style="width: 65px; height: 26px;" data-options=" required:false,validType:['#mtlNtxPrice'],missingMessage:'请输入不含税价'"/> 
+									<span id="mtlUnit">${newMaterial.mtlUnit}</span> 
 								</div>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input class="easyui-textbox" value="" id="emtlNtxPrice" style="width: 110px; height: 26px;"prompt="单价/(幅宽x克重)" disabled="disabled" /> <span>元/米</span>
 							</td>
 						</tr>
 						<tr>
@@ -331,6 +354,12 @@
 								<a onclick="showEditSupplier()" class="easyui-linkbutton" style="padding: 0px 3px;">编辑</a>
 							</td>
 						</tr>
+						<tr>
+							<td>风险自评</td>
+							<td>
+								<input disabled="disabled" class="easyui-textbox" id="riskSelfAssessment" name="newMaterial.riskSelfAssessment" value="${newMaterial.riskSelfAssessment}" style="height: 26px;" />
+							</td>
+						</tr>
 					</table>
 				</div>
 				<div id="content_two" style="width: 50%;float: left;">
@@ -363,26 +392,28 @@
 						<tr>
 							<td>含税单价</td>
 							<td>
-								<input class="easyui-textbox" name="newMaterial.mtlPrice" disabled="disabled" value="${newMaterial.mtlPrice}" style="width: 60px;height: 26px;" data-options="validType:['#mtlNtxPrice'],missingMessage:'请输入含税单价'"/> 
-								<select id="unit" name="newMaterial.mtlUnit" class="easyui-combobox" style="width:80px;height:26px" panelHeight="100"; editable="false">
-									<option value="公斤" <c:if test="${newMaterial.mtlUnit=='公斤'}"> selected="true"</c:if>>元/公斤</option>
-									<option value="米" <c:if test="${newMaterial.mtlUnit=='米'}"> selected="true"</c:if>>元/米</option>
-									<option value="码" <c:if test="${newMaterial.mtlUnit=='码'}"> selected="true"</c:if>>元/码</option>
-									<option value="英尺 " <c:if test="${newMaterial.mtlUnit=='英尺 '}"> selected="true"</c:if>>元/英尺</option>
-								</select> 
+								<input class="easyui-textbox" id="mtlPrice" name="newMaterial.mtlPrice" disabled="disabled" value="${newMaterial.mtlPrice}" style="width: 60px;height: 26px;" data-options="validType:['#mtlNtxPrice'],missingMessage:'请输入含税单价'"/>
+								<span>${newMaterial.mtlUnit}</span> 
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							
+							<td>
+								<input class="easyui-textbox" value="" id="emtlPrice" style="width: 110px; height: 26px;"prompt="单价/(幅宽x克重)"  disabled="disabled"/> <span>元/米</span>
 							</td>
 						</tr>
 						<tr>
 							<td>克重</td>
 							<td>
-								<input class="easyui-textbox" name="newMaterial.weigth" disabled="disabled" value="${newMaterial.weigth}" style="width:110px;height: 26px;" data-options="validType:['#mtlPrice'],missingMessage:'请输入克重'" /> 
+								<input class="easyui-textbox" name="newMaterial.weigth" id="weigth" disabled="disabled" value="${newMaterial.weigth}" style="width:110px;height: 26px;" data-options="validType:['#mtlPrice'],missingMessage:'请输入克重'" /> 
 								<span>克/CM²</span>
 							</td>
 						</tr>
 						<tr>
 							<td>幅宽</td>
 							<td>
-								<input class="easyui-textbox" name="newMaterial.width" disabled="disabled" value="${newMaterial.width}" style="width:110px;height: 26px;" data-options="validType:['#mtlPrice'],missingMessage:'请输入幅宽'" /> 
+								<input class="easyui-textbox" name="newMaterial.width" id="width" disabled="disabled" value="${newMaterial.width}" style="width:110px;height: 26px;" data-options="validType:['#mtlPrice'],missingMessage:'请输入幅宽'" /> 
 								<span>厘米</span>
 							</td>
 						</tr>
@@ -419,17 +450,15 @@
 					<table class="form-table"  style="padding-top:0px;">
 						<tr>
 							<td>面料照片</td>
-							<td colspan="3">
+							<td style="width: 180px;">
+								
 							</td>
+							
 						</tr>
 						<tr>
 							<td></td>
-							<td style="width: 180px;">
+							<td colspan="3" >
 								<div style="height: 100px; width:546px; border: 1px solid #95B8E7;" id="imageList"></div>
-							</td>
-							<td style="padding-left:120px;">风险自评</td>
-							<td>
-								<input class="easyui-textbox" id="riskSelfAssessment" name="newMaterial.riskSelfAssessment" value="${newMaterial.riskSelfAssessment}" style="height: 26px;" />
 							</td>
 						</tr>
 					</table>

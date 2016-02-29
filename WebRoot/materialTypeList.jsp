@@ -59,7 +59,7 @@
 			<div style="width: 100%; height: 10px;float: left;"></div>
 		</div>
 		<div style="width:100%; float: left;" id = "suppliersList">
-			<table class="easyui-datagrid" style="height:300px;" singleSelect="true">
+			<table class="easyui-datagrid" style="height:190px;" singleSelect="true">
 				<thead>
 					<tr>
 						<th data-options="field:'code'" width="">序号</th>

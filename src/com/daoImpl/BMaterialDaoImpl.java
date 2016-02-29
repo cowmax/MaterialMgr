@@ -361,7 +361,9 @@ public class BMaterialDaoImpl extends HibernateDaoSupport implements BMaterialDa
 			ematerial.setMtlName((String)r[1]);
 			ematerial.setMtlType((Integer)r[2]);
 			BigDecimal mtlPrice=(BigDecimal)r[3];
-			ematerial.setMtlPrice(mtlPrice.doubleValue());
+			if(mtlPrice!=null){
+				ematerial.setMtlPrice(mtlPrice.doubleValue());
+			}
 			ematerial.setColorCount((Integer)r[4]);
 			ematerial.setSeason((String)r[5]);
 			ematerial.setWidth((Double)r[6]);
@@ -376,7 +378,9 @@ public class BMaterialDaoImpl extends HibernateDaoSupport implements BMaterialDa
 			ematerial.setStatus((Integer)r[15]);
 			ematerial.setCreateDt((Date)r[16]);
 			BigDecimal mtlNtxPrice = (BigDecimal)r[17];
-			ematerial.setMtlNtxPrice(mtlNtxPrice.doubleValue());
+			if(mtlNtxPrice!=null){
+				ematerial.setMtlNtxPrice(mtlNtxPrice.doubleValue());
+			}
 			ematerial.setMtlCode((String)r[18]);
 			ematerial.setMtlUnit((String)r[19]);
 			ematerial.setMtlTypeName((String)r[20]);
