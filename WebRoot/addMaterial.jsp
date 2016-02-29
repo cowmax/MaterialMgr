@@ -72,6 +72,34 @@
 	    	}
      	});
      	
+     	$('#uid').textbox({
+		  onChange: function(value){
+		    var v = parseFloat(value);
+		    if (!isNaN(v)){
+			    while(v > 1) v = v/10;
+			    while(v < 10) v = v*10;
+			    
+			    v = Math.round(v)/100;
+			    
+			    $('#uid').textbox('initValue', v); // 注意：不能使用 setValue，以免循环触发 onChange 事件
+		    }
+		  }
+		});
+		
+		$('#uid2').textbox({
+		  onChange: function(value){
+		    var v = parseFloat(value);
+		    if (!isNaN(v)){
+			    while(v > 1) v = v/10;
+			    while(v < 10) v = v*10;
+			    
+			    v = Math.round(v)/100;
+			    
+			    $('#uid2').textbox('initValue', v); // 注意：不能使用 setValue，以免循环触发 onChange 事件
+		    }
+		  }
+		});
+
      	$("#uidUnit").combobox({
 	    	onSelect:function checkRoleName(params) {
 	    		var uidUnit=$("#uidUnit").combobox("getValue").trim();
@@ -707,20 +735,20 @@
 						<tr>
 							<td></td>
 							<td>
-								<input class="easyui-textbox" value="" id="emtlNtxPrice" style="width: 110px; height: 26px;"prompt="单价（幅宽x克重）" disabled="disabled" /> <span>元/米</span>
+								<input class="easyui-textbox" value="" id="emtlNtxPrice" style="width: 110px; height: 26px;"prompt="单价/(幅宽x克重)" disabled="disabled" /> <span>元/米</span>
 							</td>
 						</tr>
 						<tr>
 							<td>缩水率</td>
 							<td>
-								<div style="width: 168px;">
+								<div style="width: 200px;">
 									<select id="uidUnit" class="easyui-combobox" style="width:56px;height:26px;margin-right:5px; " panelHeight="100"; editable="false">
 										<option value="横 ">横 </option>
 										<option value="经">经</option>
 									</select> 
-									<input class="easyui-textbox" id="uid" name="newMaterial.shrinkW" value="" style="width: 41px; height: 26px;" data-options="validType:['#shrink'],missingMessage:'请输入横向收缩率'"/>
+									<input class="easyui-textbox" id="uid" name="newMaterial.shrinkW" value="" style="width: 48px; height: 26px;" data-options="validType:['#shrink'],missingMessage:'请输入横向收缩率'"/>
 									<span id="euidUnit">纵</span>
-									<input class="easyui-textbox" id="uid" name="newMaterial.shrinkH" value="" style="width: 41px; height: 26px;" data-options="validType:['#shrink'],missingMessage:'请输入纵向收缩率'"/>
+									<input class="easyui-textbox" id="uid2" name="newMaterial.shrinkH" value="" style="width: 48px; height: 26px;" data-options="validType:['#shrink'],missingMessage:'请输入纵向收缩率'"/>
 								</div>
 							</td>
 						</tr>
@@ -793,7 +821,7 @@
 							<td></td>
 							
 							<td>
-								<input class="easyui-textbox" value="" id="emtlPrice" style="width: 110px; height: 26px;"prompt="单价（幅宽x克重）"  disabled="disabled"/> <span>元/米</span>
+								<input class="easyui-textbox" value="" id="emtlPrice" style="width: 110px; height: 26px;"prompt="单价/(幅宽x克重)"  disabled="disabled"/> <span>元/米</span>
 							</td>
 						</tr>
 						<tr>
