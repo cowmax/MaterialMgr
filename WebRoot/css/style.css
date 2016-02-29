@@ -201,3 +201,18 @@ div.datagrid-cell{
 .colorSpan{
 	padding: 0px 4px;
 }
+
+
+.textbox.textbox-readonly {
+    cursor: normal;
+    background-color: #ddd;
+    color: #999;
+}
+
+.textbox.textbox-readonly .textbox-text{
+	cursor: normal;
+    background-color: #ddd;
+    color: #999;
+}
+    
+}

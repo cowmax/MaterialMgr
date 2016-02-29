@@ -235,6 +235,12 @@
 	 * 打开相关产品列表窗口
 	 */
 	function showRelateProducts(){
+		$("#getRelateProductList").window({onLoad:function(){
+			$('#relateProductCode').textbox('textbox').bind('click', function(){
+			    showProductList();
+			});
+		}});
+
 		$("#getRelateProductList").window('open');
 	}
 	

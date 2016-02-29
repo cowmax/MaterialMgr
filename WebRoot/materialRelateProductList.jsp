@@ -51,9 +51,9 @@
 	<div align="center" style="padding: 20px;">
 		<div id="options" class="toolbar" style="height: 30px;">
 			<div style="float: left; margin-bottom: 10px;">
-				<input class="easyui-textbox" id="relateProductCode" value="" style="width: 108px; height: 26px;" disabled="disabled" /> 
+				<input class="easyui-textbox" id="relateProductCode" value="" style="width: 98px; height: 26px;" readonly="readonly"/> 
 				<input class="easyui-linkbutton" type="button" id="query" 
-					style="border-color: #95B8E7; color: #95B8E7" onclick="showProductList()" value="…">
+					style="border-color: #95B8E7; color: #95B8E7; left:-10px" onclick="showProductList()" value="…">
 				<input class="easyui-textbox" type="text" id="memo" prompt="说明" value="" data-options="height:26,width:200">
 			</div>
 			<div style=" float: left;">
