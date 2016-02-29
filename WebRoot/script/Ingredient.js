@@ -33,7 +33,6 @@ $.extend($.fn.validatebox.defaults.rules, {
 					
 					var trgUrl = 'ingrshowIngredient?mtlId=' + mtlId;
 					$('#ingredientWin').window('refresh', trgUrl); 
-					
 				}
 			});
 			
@@ -43,7 +42,26 @@ $.extend($.fn.validatebox.defaults.rules, {
 
   	//弹出添加成分
 	function addIngredient(){
+		// 在 window 的 onLoad 事件表示页面 DOM 已经加载完成
+		$('#ingredientWin').window({onLoad:function(){
+			// 把用户输入的数值规范化为 : 小于 1 的 2 位小数
+			$('#BMprecent').textbox({
+				  onChange: function(value){
+				    var v = parseFloat(value);
+				    if (!isNaN(v)){
+					    while(v > 1) v = v/10;
+					    while(v < 10) v = v*10;
+					    
+					    v = Math.round(v)/100;
+					    
+					    $('#BMprecent').textbox('initValue', v); // 注意：不能使用 setValue，以免循环触发 onChange 事件
+				    }
+				  }
+				});
+		}});
+		
 		$("#ingredientWin").window('open');
+
 	}
 	
 	

@@ -39,6 +39,7 @@
 	}
 </style>
 <script type="text/javascript">
+
 </script>
 </head>
 
@@ -46,7 +47,7 @@
 	<div align="center" style="width: 80%;  padding: 10px;">
 		<div id="options" class="toolbar" style="float: left;" >
 			<form id="saveBMIngred" action="ingraddIngDt.action" method="post" >
-				<table align="center"  style="padding-left: 40px;">
+				<table align="center"  style="padding-left: 35px;">
 	  				<tr>
 		    			<td>
 		    				<select class="easyui-combobox" id="ingredientTypeCmb" name="bmaterialIngredient.ingredientName" data-options="height:26,width:110,required:true,missingMessage:'请选择成分类型'" prompt="成分" panelHeight="100";>
