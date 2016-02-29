@@ -697,7 +697,7 @@
 		</div> 
 		<!-- 添加照片 -->
 		<div id="imageWin" class="easyui-window" title="选择照片" collapsible="false" minimizable="false" maximizable="false" closed="true" modal="true"
-			 style="width:1000px;height:520px; padding: 10px;" href="itypeallImageType?mtlId=${newMaterial.mtlId}"> 
+			 style="width:680px;height:450px; padding: 10px;" href="itypeallImageType?mtlId=${newMaterial.mtlId}"> 
 		</div>  
 		
 		<!-- 添加成分 -->

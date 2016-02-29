@@ -214,5 +214,13 @@ div.datagrid-cell{
     background-color: #ddd;
     color: #999;
 }
-    
+
+.form-table.add-image tr td{
+	width:2em !important;
 }
+
+table.form-table.add-image {
+	width:100%;
+	padding: 20px 20px 20px 50px;
+}
+

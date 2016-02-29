@@ -81,17 +81,17 @@
 			</div>
 		</div>  
 	</div>
-	<div class="easyui-panel" align="center" style="width: 100%">
+	<div class="easyui-panel" align="center" style="width: 100%; border:0px">
 		<form action="imgsaveImage.action" id="saveformImage" method="post">
 				<div>
 					<h3 class="tab-subtitle">添加照片</h3>
 				</div>
 				<div id="content_one" style="width: 50%;height:400px; float: left;">
-					<table class="form-table">
+					<table class="form-table add-image">
 						<tr>
 							<td>路径</td>
 							<td>
-								<input class="easyui-textbox" id="imgUlr" name="bmaterialImage.imgUrl"  value="http://localhost:8080/materialManage/images/"  style="height: 26px;"/>
+								<input class="easyui-textbox" id="imgUlr" name="bmaterialImage.imgUrl"  value="http://localhost:8080/materialManage/images/"  style="height: 26px; width:256px"/>
 								<span style="color: red;" id="msg"></span>
 							</td>
 						</tr>
@@ -154,7 +154,7 @@
 						<tr>
 							<td>描述</td>
 							<td>
-								<input class="easyui-textbox" id="imgDesciption" name="bmaterialImage.imgDesciption" value="" style="height: 26px;"/> 
+								<input class="easyui-textbox" id="imgDesciption" name="bmaterialImage.imgDesciption" value="" style="height: 26px; width:256px"/> 
 								<span style="color: red;" id="msg"></span>
 							</td>
 						</tr>
@@ -173,7 +173,7 @@
 					</table>
 				</div>
 				<div id="content_two" style="width: 50%;float: left;">
-					<table class="form-table">
+					<table class="form-table add-image">
 						<tr>
 							<td style="text-align:center"><a href="#">刷新</a></td>
 							<td>
